@@ -1,0 +1,51 @@
+; -*- mode: lisp; package: grep-a-lot; encoding: shift_jis -*-
+
+;;; grep-a-lot/context.l
+;;
+;; Copyright (c) 2011 MIYAMUKO Katsuyuki.
+;;
+;; Permission is hereby granted, free of charge, to any person obtaining
+;; a copy of this software and associated documentation files (the
+;; "Software"), to deal in the Software without restriction, including
+;; without limitation the rights to use, copy, modify, merge, publish,
+;; distribute, sublicense, and/or sell copies of the Software, and to
+;; permit persons to whom the Software is furnished to do so, subject to
+;; the following conditions:
+;;
+;; The above copyright notice and this permission notice shall be
+;; included in all copies or substantial portions of the Software.
+;;
+;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+;; NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+;;; Code:
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (require "grep-a-lot/package")
+  )
+
+(in-package :grep-a-lot)
+
+(defparameter *grep-a-lot-last-context* nil)
+
+(defun grep-a-lot-last-context ()
+  (if (and *grep-a-lot-last-context*
+           (not (deleted-buffer-p *grep-a-lot-last-context*)))
+      *grep-a-lot-last-context*
+    (last-grep-a-lot-buffer)))
+
+(defun grep-a-lot-first-error-hook ()
+  (when (equal *this-command* 'first-error)
+    (setf *grep-a-lot-last-context* (selected-buffer))))
+
+(add-hook '*pre-command-hook* 'grep-a-lot-first-error-hook)
+
+
+(provide "grep-a-lot/context")
+
+;;; End

@@ -1,0 +1,8 @@
+2011-07-15  MIYAMUKO Katsuyuki
+
+	* ggrep に対応
+
+	* sandbox のコードを整理して取り込んだ
+	https://github.com/miyamuko/sandbox/blob/master/xyzzy/grep-a-lot.l2
+
+	* grep-a-lot 作成開始

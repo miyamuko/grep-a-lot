@@ -1,0 +1,24 @@
+package: grep-a-lot
+version: 1.0.0
+
+sources:
+  include:
+    - site-lisp/grep-a-lot/**/*.l
+  exclude:
+    - site-lisp/grep-a-lot/**/tests/*.l
+
+document:
+  - README.rdoc
+
+depends:
+  - xml-http-request
+  - json
+
+files:
+  include:
+    - site-lisp/**/*.l
+    - site-lisp/**/*.lc
+    - site-lisp/grep-a-lot/lib/*.dll
+    - site-lisp/grep-a-lot/src/**/*.*
+    - site-lisp/grep-a-lot/examples/**/*.*
+    - site-lisp/grep-a-lot/tests/*.*
