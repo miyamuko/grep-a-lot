@@ -33,7 +33,9 @@
 
 (defun get-ggrep-search-pattern ()
   (values ed::*last-ggrep-method*
-          ed::*last-ggrep-regexp-list*))
+          (if (equal *this-command* 'ed::fggrep)
+              ed::*last-fggrep-pattern-list*
+            ed::*last-ggrep-regexp-list*)))
 
 (defun get-ggrepd-search-pattern ()
   (labels ((empty-string-p (str)

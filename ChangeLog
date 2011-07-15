@@ -11,6 +11,8 @@
 
 2011-07-15  MIYAMUKO Katsuyuki
 
+	* fggrep で検索文字列が取得できていなかったのを修正
+
 	* grep-a-lot 1.0.0 リリース!
 
 	* ggrep に対応
