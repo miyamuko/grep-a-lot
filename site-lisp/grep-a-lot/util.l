@@ -31,6 +31,16 @@
 
 (in-package :grep-a-lot)
 
+(export '(*grep-a-lot-buffer-regexp*
+          *grep-a-lot-buffer-format*
+          *grep-a-lot-abbrev-length*))
+
+
+(defvar *grep-a-lot-buffer-regexp* "^\\*[a-z]?grep\\*")
+(defvar *grep-a-lot-buffer-format* "~A<~A>")
+(defvar *grep-a-lot-abbrev-length* 20)
+
+
 (defun grep-a-lot-goto (&key reverse (buffer-bar-order *next-buffer-in-tab-order*))
   (let ((next (get-next-grep-a-lot-buffer
                :reverse reverse

@@ -33,21 +33,13 @@
 
 (in-package :grep-a-lot)
 
-(export '(*grep-a-lot-buffer-regexp*
-          *grep-a-lot-buffer-format*
-          *grep-a-lot-abbrev-length*
-
-          grep-a-lot-goto-next
+(export '(grep-a-lot-goto-next
           grep-a-lot-goto-prev
           grep-a-lot-pop-stack
           grep-a-lot-clear-stack
           grep-a-lot-restart-context
           grep-a-lot-setup-keys
           ))
-
-(defvar *grep-a-lot-buffer-regexp* "^\\*[a-z]?grep\\*")
-(defvar *grep-a-lot-buffer-format* "~A<~A>")
-(defvar *grep-a-lot-abbrev-length* 20)
 
 (defun grep-a-lot-goto-next ()
   "次の grep バッファを開く"
