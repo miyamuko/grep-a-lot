@@ -33,18 +33,30 @@
 
 (defun get-grep-search-pattern ()
   ;; 検索文字列を頑張って取得する。
-  ;; *last-grep-regexp* や *last-fgrep-regexp* や *minibuffer-search-string-history*
-  ;; を見る方法もあるが、ed::scan-files を直接呼んだ場合は取得できない。
-  ;; そこで、ed::*find-error-scanner* というバッファローカル変数に入っている
-  ;; クロージャが束縛している pattern 変数から取り出す。
-  (let* ((vars (si:closure-variable ed::*find-error-scanner*))
-         (pattern (cdr (assoc 'ed::pattern vars))))
-    (cond ((typep pattern 'regexp)
-           (compiled-regexp-source pattern))
-          ((stringp pattern)
-           pattern)
-          (t
-           "???"))))
+  ;; - 基本的には ed::scan-files を直接呼ぶ場合を考慮して、
+  ;;   ed::*find-error-scanner* というバッファローカル変数に入っている
+  ;;   クロージャが束縛している pattern 変数から取り出す。
+  ;; - ただし、grep-dialog で「非同期grep」をチェックしていると、
+  ;;   このバッファローカル変数は取得できないので
+  ;;   ed::*minibuffer-search-string-history* から取得する。
+  ;; - ちなみに ed::*last-grepd-regexp* は利用されていない。
+  ;; - 非同期 grep の場合はバッファ名を変更しても、なにかキー入力するまでは
+  ;;   バッファバーに反映されない (refresh-screen してもだめ)。
+  (or (get-grep-search-pattern-from-find-error-scanner)
+      (get-grep-search-pattern-from-minibuffer-search-string-history)
+      "???"))
+
+(defun get-grep-search-pattern-from-find-error-scanner ()
+  (when ed::*find-error-scanner*
+    (let* ((vars (si:closure-variable ed::*find-error-scanner*))
+           (pattern (cdr (assoc 'ed::pattern vars))))
+      (cond ((typep pattern 'regexp)
+             (compiled-regexp-source pattern))
+            ((stringp pattern)
+             pattern)))))
+
+(defun get-grep-search-pattern-from-minibuffer-search-string-history ()
+  (car ed::*minibuffer-search-string-history*))
 
 (defun rename-grep-buffer-hook ()
   (rename-grep-buffer "*grep*" (get-grep-search-pattern)))

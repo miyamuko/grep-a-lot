@@ -1,3 +1,9 @@
+2011-07-19  MIYAMUKO Katsuyuki
+
+	* grep-dialog の非同期 grep で検索文字列の取得に失敗して
+	動いていなかった問題を修正 (Reported by @hokorobi)
+	https://github.com/miyamuko/grep-a-lot/issues/1
+
 2011-07-15  MIYAMUKO Katsuyuki
 
 	* grep-a-lot 1.0.0 リリース!
