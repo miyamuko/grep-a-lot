@@ -61,8 +61,8 @@
 (defun rename-grep-buffer-hook ()
   (rename-grep-buffer "*grep*" (get-grep-search-pattern)))
 
-(add-hook '*grep-hook* 'rename-grep-buffer-hook)
-(add-hook '*grepd-hook* 'rename-grep-buffer-hook)
+(add-hook 'ed::*grep-hook* 'rename-grep-buffer-hook)
+(add-hook 'ed::*grepd-hook* 'rename-grep-buffer-hook)
 
 
 (provide "grep-a-lot/grep-hook")
