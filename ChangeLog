@@ -1,5 +1,7 @@
 2011-07-19  MIYAMUKO Katsuyuki
 
+	* grep-a-lot 1.0.1 リリース!
+
 	* lisp/grepd.l をロードしていない状態で、grep-dialog を実行すると
 	lisp/grepd.l の autoload に失敗する問題を修正
 
