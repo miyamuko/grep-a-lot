@@ -1,6 +1,6 @@
 ; -*- mode: lisp; package: grep-a-lot; encoding: shift_jis -*-
 
-;;; grep-a-lot/util.l
+;;; grep-a-lot/api.l
 ;;
 ;; Copyright (c) 2011 MIYAMUKO Katsuyuki.
 ;;
@@ -83,6 +83,6 @@
   (run-hooks '*grep-a-lot-rename-buffer-hook*))
 
 
-(provide "grep-a-lot/util")
+(provide "grep-a-lot/api")
 
 ;;; End

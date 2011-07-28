@@ -27,7 +27,7 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (require "grep-a-lot/package")
-  (require "grep-a-lot/util")
+  (require "grep-a-lot/api")
   (require "grep-a-lot/context")
   )
 
