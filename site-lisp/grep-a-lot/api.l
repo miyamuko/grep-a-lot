@@ -82,6 +82,13 @@
   (rename-buffer (grep-a-lot-buffer-name buffer-name pattern))
   (run-hooks '*grep-a-lot-rename-buffer-hook*))
 
+(defun invoke (pkg-name func-name &rest args)
+  (let ((pkg (find-package pkg-name)))
+    (when pkg
+      (let ((func (find-symbol func-name pkg)))
+        (when (and func (fboundp func))
+          (apply func args))))))
+
 
 (provide "grep-a-lot/api")
 

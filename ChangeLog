@@ -1,10 +1,9 @@
 2011-07-28  MIYAMUKO Katsuyuki
 
 	* outline-tree2 との親和性を高めた (#2)
-	- (grep-a-lot-setup-outline-tree2-hook): outline-tree2 の
-	  ノード名を更新するフックを設定する
 	- (*grep-a-lot-rename-buffer-hook*): バッファ名の変更後に
-	  よばれるフックを追加
+	  よばれるフックを追加。
+	- outline-tree2 のノード名を更新するフックをデフォルトで追加
 	- outline-tree2 でグループ化されるようにバッファ名を変更
 	  - 変更前: *grep*<キーワード>
 	  - 変更後: *grep:<キーワード>*

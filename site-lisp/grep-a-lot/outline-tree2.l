@@ -32,23 +32,20 @@
 
 (in-package :grep-a-lot)
 
-(export '(grep-a-lot-setup-outline-tree2-hook
-          ))
+(defun refresh-outline-tree2 ()
+  ;; outline-tree2 がロードされている場合に実行
+  (invoke "outline-tree2" "outline-tree-create-buffer-node-by-buffer"))
 
 (defun grep-a-lot-setup-outline-tree2-hook ()
   (add-hook '*grep-a-lot-rename-buffer-hook*
             'refresh-outline-tree2))
 
-(defun refresh-outline-tree2 ()
-  ;; outline-tree2 がロードされている場合に実行
-  (invoke "outline-tree2" "outline-tree-create-buffer-node-by-buffer"))
-
-(defun invoke (pkg-name func-name &rest args)
-  (let ((pkg (find-package pkg-name)))
-    (when pkg
-      (let ((func (find-symbol func-name pkg)))
-        (when (and func (fboundp func))
-          (apply func args))))))
+;; outline-tree2 は ed::*after-rename-buffer-hook* が定義されている場合は、
+;; バッファ名の変更に追従できる。
+;; http://raido.sakura.ne.jp/southly/rn/index.rb?1161833288.txt
+;; それ以外の場合にのみ grep-a-lot 側で処理する。
+(unless (boundp 'ed::*after-rename-buffer-hook*)
+  (grep-a-lot-setup-outline-tree2-hook))
 
 
 (provide "grep-a-lot/outline-tree2")
