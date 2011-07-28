@@ -33,12 +33,15 @@
 
 (export '(*grep-a-lot-buffer-regexp*
           *grep-a-lot-buffer-format*
-          *grep-a-lot-abbrev-length*))
+          *grep-a-lot-abbrev-length*
+          *grep-a-lot-rename-buffer-hook*
+          ))
 
 
 (defvar *grep-a-lot-buffer-regexp* "^\\*[a-z]?grep:")
 (defvar *grep-a-lot-buffer-format* "*~A:<~A>*")
 (defvar *grep-a-lot-abbrev-length* 20)
+(defvar *grep-a-lot-rename-buffer-hook* nil)
 
 
 (defun grep-a-lot-goto (&key reverse (buffer-bar-order *next-buffer-in-tab-order*))
@@ -76,7 +79,8 @@
           (abbreviate-display-string pattern *grep-a-lot-abbrev-length*)))
 
 (defun rename-grep-buffer (buffer-name pattern)
-  (rename-buffer (grep-a-lot-buffer-name buffer-name pattern)))
+  (rename-buffer (grep-a-lot-buffer-name buffer-name pattern))
+  (run-hooks '*grep-a-lot-rename-buffer-hook*))
 
 
 (provide "grep-a-lot/util")
