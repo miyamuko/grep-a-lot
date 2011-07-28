@@ -1,6 +1,6 @@
-; -*- mode: lisp; package: user; encoding: shift_jis -*-
+; -*- mode: lisp; package: grep-a-lot; encoding: shift_jis -*-
 
-;;; grep-a-lot.l
+;;; grep-a-lot/outline-tree2.l
 ;;
 ;; Copyright (c) 2011 MIYAMUKO Katsuyuki.
 ;;
@@ -25,16 +25,32 @@
 
 ;;; Code:
 
-(in-package :user)
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (require "grep-a-lot/package")
+  (require "grep-a-lot/util")
+  )
 
-(require "grep-a-lot/version")
-(require "grep-a-lot/commands")
+(in-package :grep-a-lot)
 
-(require "grep-a-lot/outline-tree2")
-(require "grep-a-lot/grep-hook")
-(when (fboundp 'ed::ggrep)
-  (require "grep-a-lot/ggrep-hook"))
+(export '(grep-a-lot-setup-outline-tree2-hook
+          ))
 
-(provide "grep-a-lot")
+(defun grep-a-lot-setup-outline-tree2-hook ()
+  (add-hook '*grep-a-lot-rename-buffer-hook*
+            'refresh-outline-tree2))
+
+(defun refresh-outline-tree2 ()
+  ;; outline-tree2 Ç™ÉçÅ[ÉhÇ≥ÇÍÇƒÇ¢ÇÈèÍçáÇ…é¿çs
+  (invoke "outline-tree2" "outline-tree-create-buffer-node-by-buffer"))
+
+(defun invoke (pkg-name func-name &rest args)
+  (let ((pkg (find-package pkg-name)))
+    (when pkg
+      (let ((func (find-symbol func-name pkg)))
+        (when (and func (fboundp func))
+          (apply func args))))))
+
+
+(provide "grep-a-lot/outline-tree2")
 
 ;;; End
