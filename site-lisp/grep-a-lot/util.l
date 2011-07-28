@@ -36,8 +36,8 @@
           *grep-a-lot-abbrev-length*))
 
 
-(defvar *grep-a-lot-buffer-regexp* "^\\*[a-z]?grep\\*")
-(defvar *grep-a-lot-buffer-format* "~A<~A>")
+(defvar *grep-a-lot-buffer-regexp* "^\\*[a-z]?grep:")
+(defvar *grep-a-lot-buffer-format* "*~A:<~A>*")
 (defvar *grep-a-lot-abbrev-length* 20)
 
 

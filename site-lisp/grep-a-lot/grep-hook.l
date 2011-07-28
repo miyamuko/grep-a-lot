@@ -59,7 +59,7 @@
   (car ed::*minibuffer-search-string-history*))
 
 (defun rename-grep-buffer-hook ()
-  (rename-grep-buffer "*grep*" (get-grep-search-pattern)))
+  (rename-grep-buffer "grep" (get-grep-search-pattern)))
 
 (add-hook 'ed::*grep-hook* 'rename-grep-buffer-hook)
 (add-hook 'ed::*grepd-hook* 'rename-grep-buffer-hook)

@@ -51,7 +51,7 @@
   (let* ((sep (string-upcase (string method)))
          (pattern (format nil (concat "~{~A~^ " sep " ~}")
                           patterns)))
-    (rename-grep-buffer "*ggrep*" pattern)))
+    (rename-grep-buffer "ggrep" pattern)))
 
 (defun rename-ggrep-buffer-hook ()
   (multiple-value-call 'rename-ggrep-buffer (get-ggrep-search-pattern)))
