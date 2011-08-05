@@ -16,8 +16,8 @@ grep バッファを複数保存できるようにします。
 
 grep バッファのバッファ名には以下のように検索キーワードが含まれます。
 
-  *grep*<foo>
-  *ggrep*<foo OR bar>
+  *grep:<foo>*
+  *ggrep:<tiger AND bunny>*
 
 詳細は {Emacs の grep-a-lot.el の説明 (PDF)}[http://www.rubyist.net/~rubikitch/archive/Emacs-162-163.pdf]
 などを参照してください
