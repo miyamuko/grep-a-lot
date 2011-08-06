@@ -1,5 +1,5 @@
 package: grep-a-lot
-version: 1.0.1
+version: 1.1.0
 
 sources:
   include:

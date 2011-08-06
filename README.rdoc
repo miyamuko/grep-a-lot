@@ -1,7 +1,7 @@
 == grep-a-lot - 複数の grep バッファを使う
 
 * Home URL: http://miyamuko.s56.xrea.com/xyzzy/grep-a-lot/intro.htm
-* Version: 1.0.1
+* Version: 1.1.0
 
 
 === SYNOPSIS

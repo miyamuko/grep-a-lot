@@ -34,7 +34,7 @@
 (export '(grep-a-lot-version
           ))
 
-(defconstant +grep-a-lot-version+ "1.0.1")
+(defconstant +grep-a-lot-version+ "1.1.0")
 
 (defun grep-a-lot-version ()
   +grep-a-lot-version+)
