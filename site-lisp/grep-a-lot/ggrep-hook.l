@@ -2,7 +2,7 @@
 
 ;;; grep-a-lot/ggrep-hook.l
 ;;
-;; Copyright (c) 2011 MIYAMUKO Katsuyuki.
+;; Copyright (c) 2011-2012 MIYAMUKO Katsuyuki.
 ;;
 ;; Permission is hereby granted, free of charge, to any person obtaining
 ;; a copy of this software and associated documentation files (the
@@ -27,6 +27,7 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (require "grep-a-lot/package")
+  (require "grep-a-lot/api")
   )
 
 (in-package :grep-a-lot)

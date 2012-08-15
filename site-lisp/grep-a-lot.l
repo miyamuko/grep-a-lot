@@ -27,6 +27,9 @@
 
 (in-package :user)
 
+(require "grep")
+(require "grepd")
+
 (require "grep-a-lot/version")
 (require "grep-a-lot/commands")
 
