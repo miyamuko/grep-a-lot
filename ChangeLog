@@ -1,3 +1,7 @@
+2012-08-15  MIYAMUKO Katsuyuki
+
+	* *before-grep-hook* に対応 (#3)
+
 2011-08-06  MIYAMUKO Katsuyuki
 
 	* grep-a-lot 1.1.0 released!

@@ -1,8 +1,8 @@
-; -*- mode: lisp; package: user; encoding: shift_jis -*-
+; -*- mode: lisp; package: grep-a-lot; encoding: shift_jis -*-
 
-;;; grep-a-lot.l
+;;; grep-a-lot/before-grep-hook.l
 ;;
-;; Copyright (c) 2011-2012 MIYAMUKO Katsuyuki.
+;; Copyright (c) 2012 MIYAMUKO Katsuyuki.
 ;;
 ;; Permission is hereby granted, free of charge, to any person obtaining
 ;; a copy of this software and associated documentation files (the
@@ -25,21 +25,20 @@
 
 ;;; Code:
 
-(in-package :user)
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (require "grep-a-lot/package")
+  (require "grep-a-lot/api")
+  )
 
-(require "grep")
-(require "grepd")
+(in-package :grep-a-lot)
 
-(require "grep-a-lot/version")
-(require "grep-a-lot/commands")
+(defun before-grep-hook/rename-buffer (pattern)
+  (rename-grep-buffer "grep" pattern))
 
-(require "grep-a-lot/outline-tree2")
-(require "grep-a-lot/grep-hook")
-(when (boundp 'ed::*before-grep-hook*)
-  (require "grep-a-lot/before-grep-hook"))
-(when (fboundp 'ed::ggrep)
-  (require "grep-a-lot/ggrep-hook"))
+(add-hook 'ed::*before-grep-hook* 'before-grep-hook/rename-buffer)
+(add-hook 'ed::*before-grepd-hook* 'before-grep-hook/rename-buffer)
 
-(provide "grep-a-lot")
+
+(provide "grep-a-lot/grep-hook")
 
 ;;; End

@@ -2,7 +2,7 @@
 
 ;;; grep-a-lot/api.l
 ;;
-;; Copyright (c) 2011 MIYAMUKO Katsuyuki.
+;; Copyright (c) 2011-2012 MIYAMUKO Katsuyuki.
 ;;
 ;; Permission is hereby granted, free of charge, to any person obtaining
 ;; a copy of this software and associated documentation files (the
@@ -74,13 +74,21 @@
   (string-matchp *grep-a-lot-buffer-regexp* (buffer-name buffer)))
 
 (defun grep-a-lot-buffer-name (buffer-name pattern)
-  (format nil *grep-a-lot-buffer-format*
-          buffer-name
-          (abbreviate-display-string pattern *grep-a-lot-abbrev-length*)))
+  (let ((keyword (cond ((typep pattern 'regexp)
+                        (compiled-regexp-source pattern))
+                       ((stringp pattern)
+                        pattern)
+                       (t
+                        (warn "Unsupported pattern type: ~S" pattern)
+                        (format nil "~S" pattern)))))
+    (format nil *grep-a-lot-buffer-format*
+            buffer-name
+            (abbreviate-display-string keyword *grep-a-lot-abbrev-length*))))
 
 (defun rename-grep-buffer (buffer-name pattern)
-  (rename-buffer (grep-a-lot-buffer-name buffer-name pattern))
-  (run-hooks '*grep-a-lot-rename-buffer-hook*))
+  (unless (grep-a-lot-buffer-p (selected-buffer))
+    (rename-buffer (grep-a-lot-buffer-name buffer-name pattern))
+    (run-hooks '*grep-a-lot-rename-buffer-hook*)))
 
 (defun invoke (pkg-name func-name &rest args)
   (let ((pkg (find-package pkg-name)))

@@ -49,12 +49,8 @@
 
 (defun get-grep-search-pattern-from-find-error-scanner ()
   (when ed::*find-error-scanner*
-    (let* ((vars (si:closure-variable ed::*find-error-scanner*))
-           (pattern (cdr (assoc 'ed::pattern vars))))
-      (cond ((typep pattern 'regexp)
-             (compiled-regexp-source pattern))
-            ((stringp pattern)
-             pattern)))))
+    (let ((vars (si:closure-variable ed::*find-error-scanner*)))
+      (cdr (assoc 'ed::pattern vars)))))
 
 (defun get-grep-search-pattern-from-minibuffer-search-string-history ()
   (car ed::*minibuffer-search-string-history*))
