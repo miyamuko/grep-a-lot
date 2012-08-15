@@ -54,14 +54,15 @@
                           patterns)))
     (rename-grep-buffer "ggrep" pattern)))
 
-(defun rename-ggrep-buffer-hook ()
+(defun ggrep-hook/rename-buffer ()
   (multiple-value-call 'rename-ggrep-buffer (get-ggrep-search-pattern)))
 
-(defun rename-ggrepd-buffer-hook ()
+(defun ggrepd-hook/rename-buffer ()
   (multiple-value-call 'rename-ggrep-buffer (get-ggrepd-search-pattern)))
 
-(add-hook 'ed::*ggrep-hook* 'rename-ggrep-buffer-hook)
-(add-hook 'ed::*ggrepd-hook* 'rename-ggrepd-buffer-hook)
+(add-hook 'ed::*ggrep-hook* 'ggrep-hook/rename-buffer)
+(add-hook 'ed::*ggrepd-hook* 'ggrepd-hook/rename-buffer)
+
 
 (provide "grep-a-lot/ggrep-hook")
 
